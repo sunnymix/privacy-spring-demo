@@ -1,6 +1,6 @@
-package com.sunnymix.sensitive.spring.model;
+package com.sunnymix.privacy.spring.model;
 
-import com.sunnymix.sensitive.spring.aop.SensitiveField;
+import com.sunnymix.privacy.spring.aop.PrivacyField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,10 +15,10 @@ public class User {
 
     private String name;
 
-    @SensitiveField
+    @PrivacyField
     private String phone;
 
-    @SensitiveField
+    @PrivacyField
     private List<String> phoneList = new ArrayList<>();
 
     private List<User> friendList = new ArrayList<>();

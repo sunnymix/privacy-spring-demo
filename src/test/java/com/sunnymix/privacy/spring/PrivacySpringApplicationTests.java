@@ -1,7 +1,7 @@
-package com.sunnymix.sensitive.spring;
+package com.sunnymix.privacy.spring;
 
-import com.sunnymix.sensitive.spring.controller.UserController;
-import com.sunnymix.sensitive.spring.model.User;
+import com.sunnymix.privacy.spring.controller.UserController;
+import com.sunnymix.privacy.spring.model.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @Import(TestConfig.class)
-class SensitiveSpringApplicationTests {
+class PrivacySpringApplicationTests {
 
     @LocalServerPort
     private int port;

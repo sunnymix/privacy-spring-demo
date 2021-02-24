@@ -1,7 +1,7 @@
-package com.sunnymix.sensitive.spring.controller;
+package com.sunnymix.privacy.spring.controller;
 
-import com.sunnymix.sensitive.spring.aop.Sensitive;
-import com.sunnymix.sensitive.spring.model.User;
+import com.sunnymix.privacy.spring.aop.Privacy;
+import com.sunnymix.privacy.spring.model.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class UserController {
 
     @GetMapping("/user")
-    @Sensitive
+    @Privacy
     public User getUser() {
         User user = new User();
         user.setName("sunny");
