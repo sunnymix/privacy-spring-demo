@@ -1,6 +1,6 @@
 package com.sunnymix.privacy.spring.controller;
 
-import com.sunnymix.privacy.spring.aop.Privacy;
+import com.sunnymix.privacy.aop.Privacy;
 import com.sunnymix.privacy.spring.model.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

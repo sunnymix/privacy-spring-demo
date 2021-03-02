@@ -1,6 +1,6 @@
 package com.sunnymix.privacy.spring;
 
-import com.sunnymix.privacy.spring.aop.Privacy;
+import com.sunnymix.privacy.aop.Privacy;
 import com.sunnymix.privacy.spring.model.User;
 
 public class UserTestService {

@@ -1,4 +1,4 @@
-package com.sunnymix.privacy.spring.aop;
+package com.sunnymix.privacy.aop;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -10,4 +10,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public @interface PrivacyField {
+
+    String privacyType();
+
 }

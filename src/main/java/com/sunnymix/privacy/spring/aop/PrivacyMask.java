@@ -1,5 +1,7 @@
 package com.sunnymix.privacy.spring.aop;
 
+import com.sunnymix.privacy.aop.PrivacyField;
+
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Objects;
