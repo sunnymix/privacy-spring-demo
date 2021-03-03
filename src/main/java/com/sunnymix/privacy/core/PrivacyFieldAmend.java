@@ -1,4 +1,4 @@
-package com.sunnymix.privacy.integrate;
+package com.sunnymix.privacy.core;
 
 import com.sunnymix.privacy.PrivacyService;
 import com.sunnymix.privacy.exception.PrivacyException;

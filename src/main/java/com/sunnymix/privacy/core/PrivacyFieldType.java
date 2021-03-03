@@ -1,4 +1,4 @@
-package com.sunnymix.privacy.integrate;
+package com.sunnymix.privacy.core;
 
 import java.util.ArrayList;
 import java.util.List;

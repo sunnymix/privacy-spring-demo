@@ -1,11 +1,9 @@
-package com.sunnymix.privacy.integrate;
+package com.sunnymix.privacy.core;
 
 import com.sunnymix.privacy.exception.PrivacyException;
-import com.sunnymix.privacy.spring.model.User;
 import lombok.Getter;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
 
 import com.sunnymix.privacy.integrate.annotation.PrivacyField;
 
