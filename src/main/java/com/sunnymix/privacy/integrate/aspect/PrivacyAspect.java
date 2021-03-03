@@ -1,6 +1,6 @@
 package com.sunnymix.privacy.integrate.aspect;
 
-import com.sunnymix.privacy.core.PrivacyFieldAmend;
+import com.sunnymix.privacy.core.PrivacyFacade;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -18,7 +18,7 @@ public class PrivacyAspect {
     @Around("privacyMethod()")
     public Object callAtPrivacyMethod(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         Object resObj = proceedingJoinPoint.proceed();
-        return PrivacyFieldAmend.amend(null, resObj);
+        return PrivacyFacade.amend(resObj);
     }
 
 }

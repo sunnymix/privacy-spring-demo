@@ -10,7 +10,7 @@ import java.util.List;
 
 import static java.lang.String.format;
 
-public class PrivacyFieldAmend {
+public class PrivacyAmendService {
 
     public static Object amend(PrivacyFieldWrap parent, Object obj) {
         if (null == obj) {
