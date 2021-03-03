@@ -22,12 +22,13 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
-    compileOnly 'com.sunnymix:privacy:0.0.3-SNAPSHOT'
+    implementation 'com.sunnymix:privacy:0.0.3-SNAPSHOT'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntime 'org.junit.jupiter:junit-jupiter-engine'
     testRuntime 'org.junit.platform:junit-platform-runner'
+    testRuntime 'org.junit.vintage:junit-vintage-engine'
 }
 
 test {

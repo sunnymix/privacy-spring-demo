@@ -1,4 +1,4 @@
-package com.sunnymix.privacy.aop;
+package com.sunnymix.privacy.integrate.annotation;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

@@ -39,7 +39,7 @@ class PrivacySpringApplicationTests {
     @Test
     void getUser() {
         assertThat(this.restTemplate.getForObject(url("/user"), String.class))
-                .contains("{\"name\":\"sunny\",\"phone\":\"123****1111\",\"phoneList\":[\"123****1112\",\"123****1113\"],\"friendList\":[{\"name\":\"Tom\",\"phone\":\"123****1114\",\"phoneList\":[\"123****1115\"],\"friendList\":[]}]}");
+                .contains("{\"name\":\"S**\",\"phone\":\"123****1111\",\"phoneList\":[\"123****1112\",\"123****1113\"],\"friendList\":[{\"name\":\"T**\",\"phone\":\"123****1114\",\"phoneList\":[\"123****1115\"],\"friendList\":[]}]}");
     }
 
     @Autowired
@@ -48,14 +48,14 @@ class PrivacySpringApplicationTests {
     @Test
     void newUser() {
         User user = new User();
-        user.setName("sunny");
+        user.setName("Sunny");
         user.setPhone("12300001111");
         user.setPhoneList(Arrays.asList("12300001111", "12300001112"));
 
         User maskUser = userTestService.maskOne(user);
 
         User expectMaskUser = new User();
-        expectMaskUser.setName("sunny");
+        expectMaskUser.setName("S**");
         expectMaskUser.setPhone("123****1111");
         expectMaskUser.setPhoneList(Arrays.asList("123****1111", "123****1112"));
 

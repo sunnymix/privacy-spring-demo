@@ -1,4 +1,4 @@
-package com.sunnymix.privacy.aop;
+package com.sunnymix.privacy.integrate.annotation;
 
 import java.lang.annotation.*;
 

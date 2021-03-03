@@ -1,15 +1,18 @@
-package com.sunnymix.privacy.aop;
+package com.sunnymix.privacy.integrate;
 
 import com.sunnymix.privacy.exception.PrivacyException;
+import com.sunnymix.privacy.spring.model.User;
 import lombok.Getter;
 
 import java.lang.reflect.Field;
-import java.util.List;
+import java.util.Arrays;
+
+import com.sunnymix.privacy.integrate.annotation.PrivacyField;
 
 import static java.lang.String.format;
 
 @Getter
-public class PrivacyFieldInfo {
+public class PrivacyFieldWrap {
 
     private final Object fieldValue;
     private final String fieldType;
@@ -18,7 +21,7 @@ public class PrivacyFieldInfo {
     private final boolean isRoot;
     private final boolean isInheritPrivacy;
 
-    private PrivacyFieldInfo(Object fieldValue,
+    private PrivacyFieldWrap(Object fieldValue,
                              String fieldType,
                              String privacyType,
                              boolean isSelfPrivacy,
@@ -30,6 +33,22 @@ public class PrivacyFieldInfo {
         this.isSelfPrivacy = isSelfPrivacy;
         this.isRoot = isRoot;
         this.isInheritPrivacy = isInheritPrivacy;
+    }
+
+    @Override
+    public String toString() {
+        return "PrivacyFieldInfo{" +
+                "fieldValue=" + fieldValue +
+                ", fieldType='" + fieldType + '\'' +
+                ", privacyType='" + privacyType + '\'' +
+                ", isSelfPrivacy=" + isSelfPrivacy +
+                ", isRoot=" + isRoot +
+                ", isInheritPrivacy=" + isInheritPrivacy +
+                '}';
+    }
+
+    public boolean isNullValue() {
+        return null == this.fieldValue;
     }
 
     public boolean isUnsupportedType() {
@@ -52,74 +71,7 @@ public class PrivacyFieldInfo {
         return isSelfPrivacy || isInheritPrivacy;
     }
 
-    public static Object amend(PrivacyFieldInfo parent, Object obj) {
-        if (null == obj) {
-            return null;
-        }
-
-        Object result = obj;
-        PrivacyFieldInfo field = of(parent, obj);
-
-        if (field.isListType()) {
-            // 1.list
-            result = amendList(parent, obj);
-        } else if (field.isCustomType()) {
-            // 2.custom
-            result = amendCustom(parent, obj);
-        } else if (field.isBasicType()) {
-            // 3.basic
-            result = amendBasic(parent, obj);
-        } else {
-            // 4.other
-            if (field.isPrivacy()) {
-                String message = format("unsupported field-type:'%s'", field.getFieldType());
-                throw new PrivacyException(message);
-            }
-        }
-
-        return result;
-    }
-
-    @SuppressWarnings("unchecked")
-    public static Object amendList(PrivacyFieldInfo parent, Object obj) {
-        List<Object> listObj = (List<Object>) obj;
-        int size = listObj.size();
-        if (size > 0) {
-            for (int i = 0; i < size; i++) {
-                Object ele = listObj.get(i);
-                Object maskEle = amend(parent, ele);
-                listObj.set(i, maskEle);
-            }
-        }
-        return listObj;
-    }
-
-    public static Object amendCustom(PrivacyFieldInfo parent, Object obj) {
-        if (null == obj) {
-            return null;
-        }
-
-        for (Field objField : obj.getClass().getDeclaredFields()) {
-            PrivacyFieldInfo fieldInfo = of(null, obj, objField);
-            if (null == fieldInfo) {
-                continue;
-            }
-            Object amendResult = amend(null, fieldInfo.fieldValue);
-            objField.setAccessible(true);
-            try {
-                objField.set(obj, amendResult);
-            } catch (IllegalAccessException cause) {
-                throw new PrivacyException("cannot set field value", cause);
-            }
-        }
-        return obj;
-    }
-
-    public static Object amendBasic(PrivacyFieldInfo parent, Object obj) {
-        throw new PrivacyException("error");
-    }
-
-    public static PrivacyFieldInfo of(PrivacyFieldInfo parent, Object obj, Field objField) {
+    public static PrivacyFieldWrap of(PrivacyFieldWrap parent, Object obj, Field objField) {
         PrivacyField annotation = getAnnotation(objField);
         Object fieldValue = null;
         try {
@@ -130,12 +82,12 @@ public class PrivacyFieldInfo {
         return of(parent, fieldValue, annotation);
     }
 
-    public static PrivacyFieldInfo of(PrivacyFieldInfo parent, Object obj) {
+    public static PrivacyFieldWrap of(PrivacyFieldWrap parent, Object obj) {
         PrivacyField annotation = getAnnotation(obj);
         return of(parent, obj, annotation);
     }
 
-    private static PrivacyFieldInfo of(PrivacyFieldInfo parent, Object obj,
+    private static PrivacyFieldWrap of(PrivacyFieldWrap parent, Object obj,
                                        PrivacyField annotation) {
         if (null == obj) {
             return null;
@@ -154,9 +106,12 @@ public class PrivacyFieldInfo {
         if (null != parent) {
             isInheritPrivacy = parent.isPrivacy() &&
                     PrivacyFieldType.isInInheritableTypes(fieldType);
+            if (null == privacyType) {
+                privacyType = parent.getPrivacyType();
+            }
         }
 
-        return new PrivacyFieldInfo(
+        return new PrivacyFieldWrap(
                 obj, fieldType, privacyType, isPrivacy, isRoot, isInheritPrivacy);
     }
 

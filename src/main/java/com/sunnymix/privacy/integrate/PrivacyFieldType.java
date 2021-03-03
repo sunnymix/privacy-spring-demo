@@ -1,4 +1,4 @@
-package com.sunnymix.privacy.aop;
+package com.sunnymix.privacy.integrate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,19 +49,15 @@ public class PrivacyFieldType {
     }
 
     private static boolean isStringType(Object obj) {
-        return isType(obj, String.class);
+        return obj instanceof String;
     }
 
     private static boolean isIntegerType(Object obj) {
-        return isType(obj, Integer.class);
+        return obj instanceof Integer;
     }
 
     private static boolean isListType(Object obj) {
-        return isType(obj, LIST.getClass());
-    }
-
-    private static boolean isType(Object obj, Class<?> type) {
-        return obj.getClass().isAssignableFrom(type);
+        return obj instanceof List;
     }
 
     private static boolean isBuiltinType(Object obj) {
@@ -70,12 +66,6 @@ public class PrivacyFieldType {
 
     private static boolean isCustomType(Object obj) {
         return obj.getClass().getClassLoader() != null;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(whichType("Sunny"));
-        System.out.println(whichType(1));
-        System.out.println(whichType(new ArrayList<>()));
     }
 
 }

@@ -1,6 +1,6 @@
-package com.sunnymix.privacy.aop;
+package com.sunnymix.privacy.integrate.aspect;
 
-import com.sunnymix.privacy.exception.PrivacyException;
+import com.sunnymix.privacy.integrate.PrivacyFieldAmend;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -11,14 +11,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class PrivacyAspect {
 
-    @Pointcut("@annotation(com.sunnymix.privacy.aop.Privacy)")
+    @Pointcut("@annotation(com.sunnymix.privacy.integrate.annotation.Privacy)")
     private void privacyMethod() {
     }
 
     @Around("privacyMethod()")
     public Object callAtPrivacyMethod(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         Object resObj = proceedingJoinPoint.proceed();
-        throw new PrivacyException("todo");
+        return PrivacyFieldAmend.amend(null, resObj);
     }
 
 }
