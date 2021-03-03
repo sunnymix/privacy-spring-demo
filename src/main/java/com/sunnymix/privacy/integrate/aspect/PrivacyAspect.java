@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PrivacyAspect {
 
-    @Pointcut("@annotation(com.sunnymix.privacy.integrate.annotation.Privacy)")
+    @Pointcut("@annotation(com.sunnymix.privacy.core.annotation.Privacy)")
     private void privacyMethod() {
     }
 
