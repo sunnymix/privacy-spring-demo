@@ -1,7 +1,6 @@
 package com.sunnymix.privacy.spring.model;
 
 import com.sunnymix.privacy.core.PrivacyType;
-import com.sunnymix.privacy.core.annotation.Privacy;
 import com.sunnymix.privacy.core.annotation.PrivacyField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +12,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Privacy
 public class User {
 
     @PrivacyField(privacyType = PrivacyType.NAME)
