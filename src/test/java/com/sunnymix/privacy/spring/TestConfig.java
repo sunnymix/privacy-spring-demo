@@ -5,6 +5,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @author Sunny
+ * @since 2021-03-01
+ */
 @TestConfiguration
 @Configuration
 @ComponentScan({"com.sunnymix"})

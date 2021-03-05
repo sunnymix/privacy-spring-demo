@@ -14,6 +14,10 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * @author Sunny
+ * @since 2021-03-01
+ */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @Import(TestConfig.class)
 class PrivacySpringApplicationTests {

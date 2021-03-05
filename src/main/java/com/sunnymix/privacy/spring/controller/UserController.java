@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 
+/**
+ * @author Sunny
+ * @since 2021-03-01
+ */
 @RestController
 public class UserController {
 
